@@ -31,12 +31,13 @@ jobs:
     - name: install tools
       if: github.event_name != 'schedule' || steps.restore-tools.outputs.cache-hit != 'true'
       run: |-
-        wget https://gist.github.com/DanielEgbers/34c860817cba8707f5fb5a760b30780e/raw/502891052bd48b1e4fb9bfda768c37d4c3efccb5/dotnet-script.1.0.1-custom.nupkg
+        wget --quiet https://gist.githubusercontent.com/DanielEgbers/34c860817cba8707f5fb5a760b30780e/raw/502891052bd48b1e4fb9bfda768c37d4c3efccb5/dotnet-script.1.0.1-custom.nupkg
         dotnet tool update --tool-path .tools dotnet-script --version 1.0.1-custom --add-source .
     - name: clone scripts
       env:
         SCRIPTS_REPO: ${{ secrets.SCRIPTS_REPO }}
       run: |-
+        git config --global advice.detachedHead false
         git clone --depth 1 --branch v0 $SCRIPTS_REPO scripts
     - name: debug
       run: |-
