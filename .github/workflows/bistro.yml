@@ -38,7 +38,7 @@ jobs:
         SCRIPTS_REPO: ${{ secrets.SCRIPTS_REPO }}
       run: |-
         git config --global advice.detachedHead false
-        git clone --depth 1 --branch v0 $SCRIPTS_REPO scripts
+        git clone --depth 1 --branch v1 $SCRIPTS_REPO scripts
     - name: debug
       run: |-
         .tools/dotnet-script --info
